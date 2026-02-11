@@ -65,6 +65,6 @@ namespace ArtExhibit.BackEnd.Application.Services;
     }
     public async Task DeleteCategoryAsync(int id)
     {
-
+        await _repository.DeleteAsync(id);
     }
 }

@@ -21,7 +21,7 @@ public class CategoryRepository : ICategoryRepository
 
   public  async Task<Category?> GetByIdAsync(int id)
     {
-        return await _context.Categories.AsNoTracking().FirstOrDefaultAsync(prd => prd.id == id);
+        return await _context.Categories.AsNoTracking().FirstOrDefaultAsync(ctg => ctg.id == id);
     }
 
   public async Task<Category?> AddAsync(Category category)

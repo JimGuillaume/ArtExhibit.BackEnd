@@ -22,7 +22,13 @@ public class ApplicationDbContext : IdentityDbContext
             new Category { id = 3, name = "Photographie" },
             new Category { id = 4, name = "Dessin" }
             );
+
+        builder.Entity<UserType>().HasData(
+            new UserType { Id = 1, Name = "User" },
+            new UserType { Id = 2, Name = "Administrator" }
+            );
     }
 
     public DbSet<Category> Categories { get; set; } = null!;
+    public DbSet<UserType> UserTypes { get; set; } = null!;
 }
