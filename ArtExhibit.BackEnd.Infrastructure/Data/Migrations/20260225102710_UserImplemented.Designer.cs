@@ -3,6 +3,7 @@ using System;
 using ArtExhibit.BackEnd.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260225102710_UserImplemented")]
+    partial class UserImplemented
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.3");
@@ -55,124 +58,6 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ArtExhibit.BackEnd.Domain.Entities.Item", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<float>("Price")
-                        .HasColumnType("REAL");
-
-                    b.PrimitiveCollection<string>("Tags")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Items");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryId = 1,
-                            Description = "Beautiful oil painting capturing the golden hour over the Eiffel Tower",
-                            Name = "Sunset Over Paris",
-                            Price = 1250.5f,
-                            Tags = "[\"landscape\",\"paris\",\"sunset\",\"oil\"]",
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryId = 1,
-                            Description = "Modern abstract painting with vibrant colors",
-                            Name = "Abstract Dreams",
-                            Price = 890f,
-                            Tags = "[\"abstract\",\"modern\",\"colorful\"]",
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryId = 2,
-                            Description = "Life-size bronze sculpture of an ancient warrior",
-                            Name = "Bronze Warrior",
-                            Price = 5500f,
-                            Tags = "[\"bronze\",\"warrior\",\"ancient\",\"statue\"]",
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CategoryId = 2,
-                            Description = "Elegant marble sculpture depicting a ballet dancer",
-                            Name = "Dancing Figure",
-                            Price = 3200f,
-                            Tags = "[\"marble\",\"ballet\",\"dance\",\"elegant\"]",
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CategoryId = 3,
-                            Description = "Black and white photography series of Parisian streets",
-                            Name = "Urban Streets",
-                            Price = 450f,
-                            Tags = "[\"photography\",\"black-white\",\"urban\",\"paris\"]",
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CategoryId = 3,
-                            Description = "Stunning landscape photography collection",
-                            Name = "Nature's Beauty",
-                            Price = 680f,
-                            Tags = "[\"nature\",\"landscape\",\"photography\",\"color\"]",
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CategoryId = 4,
-                            Description = "Detailed charcoal drawing of a human face",
-                            Name = "Portrait Study",
-                            Price = 320f,
-                            Tags = "[\"portrait\",\"charcoal\",\"drawing\",\"realistic\"]",
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CategoryId = 4,
-                            Description = "Collection of detailed plant and flower sketches",
-                            Name = "Botanical Sketches",
-                            Price = 280f,
-                            Tags = "[\"botanical\",\"sketches\",\"nature\",\"pencil\"]",
-                            UserId = 3
-                        });
-                });
-
             modelBuilder.Entity("ArtExhibit.BackEnd.Domain.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -207,48 +92,6 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                     b.HasIndex("UserTypeId");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            FirstName = "Marie",
-                            LastName = "Dubois",
-                            UserEmail = "marie.dubois@example.com",
-                            UserName = "marie_artist",
-                            UserPhone = "0612345678",
-                            UserTypeId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            FirstName = "Pierre",
-                            LastName = "Martin",
-                            UserEmail = "pierre.martin@example.com",
-                            UserName = "pierre_sculptor",
-                            UserPhone = "0623456789",
-                            UserTypeId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            FirstName = "Sophie",
-                            LastName = "Bernard",
-                            UserEmail = "sophie.bernard@example.com",
-                            UserName = "sophie_photo",
-                            UserPhone = "0634567890",
-                            UserTypeId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            FirstName = "Jean",
-                            LastName = "Admin",
-                            UserEmail = "admin@example.com",
-                            UserName = "admin_user",
-                            UserPhone = "0645678901",
-                            UserTypeId = 2
-                        });
                 });
 
             modelBuilder.Entity("ArtExhibit.BackEnd.Domain.Entities.UserType", b =>
@@ -468,25 +311,6 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("ArtExhibit.BackEnd.Domain.Entities.Item", b =>
-                {
-                    b.HasOne("ArtExhibit.BackEnd.Domain.Entities.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ArtExhibit.BackEnd.Domain.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ArtExhibit.BackEnd.Domain.Entities.User", b =>
