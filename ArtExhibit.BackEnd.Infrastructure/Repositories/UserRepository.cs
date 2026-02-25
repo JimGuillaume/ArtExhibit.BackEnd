@@ -14,11 +14,17 @@ public class UserRepository : IUserRepository
     }
     public async Task<IEnumerable<User>> GetAllAsync()
     {
-        return await _context.Users.AsNoTracking().ToListAsync();
+        return await _context.Users
+            .Include(u => u.UserType)
+            .AsNoTracking()
+            .ToListAsync();
     }    
     public async Task<User?> GetByIdAsync(int id)
     {
-        return await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
+        return await _context.Users
+            .Include(u => u.UserType)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(u => u.Id == id);
     }
     public async Task<User?> AddAsync(User entity)
     {

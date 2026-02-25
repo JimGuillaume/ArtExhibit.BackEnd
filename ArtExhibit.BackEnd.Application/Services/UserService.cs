@@ -65,7 +65,11 @@ public class UserService : IUserService
 
         var NewUser = await _repository.AddAsync(user);
         if (NewUser != null)
-            return MapToDTO(NewUser);
+        {
+            var userWithUserType = await _repository.GetByIdAsync(NewUser.Id);
+            if (userWithUserType != null)
+                return MapToDTO(userWithUserType);
+        }
         return null;
     }
 
