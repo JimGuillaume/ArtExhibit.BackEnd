@@ -220,6 +220,51 @@ public class ApplicationDbContext : IdentityDbContext
                 BuyerId = 2
             }
             );
+
+        //Seed Sample Orders
+        builder.Entity<Order>().HasData(
+            new Order
+            {
+                Id = 1,
+                UserId = 1,
+                TotalPrice = 850.00f,
+                Commission = 85.00f,
+                OrderStatus = "Completed"
+            },
+            new Order
+            {
+                Id = 2,
+                UserId = 4,
+                TotalPrice = 3950.00f,
+                Commission = 395.00f,
+                OrderStatus = "Completed"
+            },
+            new Order
+            {
+                Id = 3,
+                UserId = 2,
+                TotalPrice = 450.00f,
+                Commission = 45.00f,
+                OrderStatus = "Processing"
+            },
+            new Order
+            {
+                Id = 4,
+                UserId = 3,
+                TotalPrice = 1250.50f,
+                Commission = 125.05f,
+                OrderStatus = "Pending"
+            },
+            new Order
+            {
+                Id = 5,
+                UserId = 1,
+                TotalPrice = 680.00f,
+                Commission = 68.00f,
+                OrderStatus = "Completed"
+            }
+            );
+
     }
 
     public DbSet<Category> Categories { get; set; } = null!;
@@ -227,4 +272,6 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<User> Users { get; set; } = null!;
     public DbSet<Item> Items { get; set; } = null!;
     public DbSet<Sale> Sales { get; set; } = null!;
+    public DbSet<Order> Orders { get; set; } = null!;
+
 }
