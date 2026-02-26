@@ -273,5 +273,6 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Item> Items { get; set; } = null!;
     public DbSet<Sale> Sales { get; set; } = null!;
     public DbSet<Order> Orders { get; set; } = null!;
+    public DbSet<Invoice> Invoices { get; set; } = null!;
 
 }
