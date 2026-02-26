@@ -265,6 +265,38 @@ public class ApplicationDbContext : IdentityDbContext
             }
             );
 
+        //Seed Sample Invoices
+        builder.Entity<Invoice>().HasData(
+            new Invoice
+            {
+                Id = 1,
+                Date = new DateOnly(2024, 1, 21),
+                Amount = 850.00f,
+                OrderId = 1
+            },
+            new Invoice
+            {
+                Id = 2,
+                Date = new DateOnly(2024, 2, 29),
+                Amount = 3950.00f,
+                OrderId = 2
+            },
+            new Invoice
+            {
+                Id = 3,
+                Date = new DateOnly(2024, 2, 11),
+                Amount = 450.00f,
+                OrderId = 3
+            },
+            new Invoice
+            {
+                Id = 4,
+                Date = new DateOnly(2024, 3, 21),
+                Amount = 680.00f,
+                OrderId = 5
+            }
+            );
+
     }
 
     public DbSet<Category> Categories { get; set; } = null!;
