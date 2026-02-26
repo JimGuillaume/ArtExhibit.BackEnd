@@ -341,6 +341,80 @@ public class ApplicationDbContext : IdentityDbContext
             }
             );
 
+        //Seed Sample Item Reviews
+        builder.Entity<ItemReview>().HasData(
+            new ItemReview
+            {
+                Id = 1,
+                UserId = 4,
+                ItemId = 1,
+                Review = "Absolutely stunning artwork! The colors are vibrant and the detail is incredible."
+            },
+            new ItemReview
+            {
+                Id = 2,
+                UserId = 2,
+                ItemId = 1,
+                Review = "Beautiful piece. Perfect for my living room."
+            },
+            new ItemReview
+            {
+                Id = 3,
+                UserId = 1,
+                ItemId = 3,
+                Review = "Impressive sculpture with great attention to detail. Worth the price."
+            },
+            new ItemReview
+            {
+                Id = 4,
+                UserId = 4,
+                ItemId = 3,
+                Review = "The craftsmanship is exceptional. A true masterpiece!"
+            },
+            new ItemReview
+            {
+                Id = 5,
+                UserId = 1,
+                ItemId = 5,
+                Review = "The photographs capture the essence of Paris beautifully."
+            },
+            new ItemReview
+            {
+                Id = 6,
+                UserId = 4,
+                ItemId = 6,
+                Review = "Nature's Beauty indeed! These photos are breathtaking."
+            },
+            new ItemReview
+            {
+                Id = 7,
+                UserId = 2,
+                ItemId = 6,
+                Review = "High quality prints with amazing composition."
+            },
+            new ItemReview
+            {
+                Id = 8,
+                UserId = 3,
+                ItemId = 4,
+                Review = "The marble work is exquisite. The dancer seems almost alive."
+            },
+            new ItemReview
+            {
+                Id = 9,
+                UserId = 1,
+                ItemId = 7,
+                Review = "Remarkable charcoal work. The emotion in the portrait is captivating."
+            },
+            new ItemReview
+            {
+                Id = 10,
+                UserId = 2,
+                ItemId = 8,
+                Review = "Lovely botanical sketches, very detailed and accurate."
+            }
+            );
+
     }
 
     public DbSet<Category> Categories { get; set; } = null!;
@@ -351,5 +425,6 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Order> Orders { get; set; } = null!;
     public DbSet<Invoice> Invoices { get; set; } = null!;
     public DbSet<Report> Reports { get; set; } = null!;
+    public DbSet<ItemReview> ItemsReviews { get; set; } = null!;
 
 }

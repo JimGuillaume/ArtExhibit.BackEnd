@@ -1,6 +1,7 @@
 using ArtExhibit.BackEnd.Application.Interfaces.Repositories;
 using ArtExhibit.BackEnd.Application.Interfaces.Services;
 using ArtExhibit.BackEnd.Application.Services;
+using ArtExhibit.BackEnd.Infrastructure;
 using ArtExhibit.BackEnd.Infrastructure.Data;
 using ArtExhibit.BackEnd.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +43,10 @@ builder.Services.AddScoped<IInvoiceService, InvoiceService> ();
 
 builder.Services.AddScoped<IReportRepository, ReportRepository>();
 builder.Services.AddScoped<IReportService, ReportService>();
+
+builder.Services.AddScoped<IItemReviewRepository, ItemReviewRepository>();
+builder.Services.AddScoped<IItemReviewService, ItemReviewService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
