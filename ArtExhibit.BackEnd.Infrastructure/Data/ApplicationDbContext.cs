@@ -301,7 +301,7 @@ public class ApplicationDbContext : IdentityDbContext
 
     public DbSet<Category> Categories { get; set; } = null!;
     public DbSet<UserType> UserTypes { get; set; } = null!;
-    public DbSet<User> Users { get; set; } = null!;
+    public new DbSet<User> Users { get; set; } = null!;
     public DbSet<Item> Items { get; set; } = null!;
     public DbSet<Sale> Sales { get; set; } = null!;
     public DbSet<Order> Orders { get; set; } = null!;

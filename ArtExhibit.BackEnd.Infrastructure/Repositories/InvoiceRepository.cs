@@ -43,10 +43,10 @@ public class InvoiceRepository : IInvoiceRepository
 
     public async Task DeleteAsync(int id)
     {
-        var invoice = await _context.Items.FindAsync(id);
+        var invoice = await _context.Invoices.FindAsync(id);
         if (invoice != null)
         {
-            _context.Items.Remove(invoice);
+            _context.Invoices.Remove(invoice);
             await _context.SaveChangesAsync();
         }
     }

@@ -3,8 +3,5 @@
 public class CreateInvoiceDTO
 {
     public DateOnly Date { get; set; }
-    public float Amount { get; set; } = 0f;
     public int OrderId { get; set; }
-    public float OrderPrice { get; set; } = 0f;
-    public float OrderComission { get; set; } = 0f;
 }
