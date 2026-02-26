@@ -19,8 +19,8 @@ public class CategoryService : ICategoryService
     {
         return new CategoryDTO
         {
-            Id = category.id,
-            Name = category.name,
+            Id = category.Id,
+            Name = category.Name,
         };
     }
 
@@ -48,7 +48,7 @@ public class CategoryService : ICategoryService
     {
         var category = new Category
         {
-            name = categoryDTO.Name
+            Name = categoryDTO.Name
         };
         var newcategory = await _repository.AddAsync(category);
         if(newcategory != null)
@@ -60,7 +60,7 @@ public class CategoryService : ICategoryService
     {
         var category = await _repository.GetByIdAsync(categoryDTO.Id);
         if (category == null) throw new Exception("Category Not found");
-        category.name = categoryDTO.Name;
+        category.Name = categoryDTO.Name;
         await _repository.UpdateAsync(category);
     }
 

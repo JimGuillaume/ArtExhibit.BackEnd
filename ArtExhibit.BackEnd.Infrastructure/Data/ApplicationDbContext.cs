@@ -17,10 +17,10 @@ public class ApplicationDbContext : IdentityDbContext
 
         //Seed Initial Category
         builder.Entity<Category>().HasData(
-            new Category { id = 1, name = "Peinture" },
-            new Category { id = 2, name = "Sculpture" },
-            new Category { id = 3, name = "Photographie" },
-            new Category { id = 4, name = "Dessin" }
+            new Category { Id = 1, Name = "Peinture" },
+            new Category { Id = 2, Name = "Sculpture" },
+            new Category { Id = 3, Name = "Photographie" },
+            new Category { Id = 4, Name = "Dessin" }
             );
 
         //Seed Initial User Types
@@ -297,6 +297,50 @@ public class ApplicationDbContext : IdentityDbContext
             }
             );
 
+        //Seed Sample Reports
+        builder.Entity<Report>().HasData(
+            new Report
+            {
+                Id = 1,
+                UserId = 4,
+                ItemId = 2,
+                Date = new DateOnly(2024, 1, 10),
+                Description = "Item description contains misleading information about the artwork origin"
+            },
+            new Report
+            {
+                Id = 2,
+                UserId = 2,
+                ItemId = 5,
+                Date = new DateOnly(2024, 1, 25),
+                Description = "Suspected copyright violation - images appear to be stock photos"
+            },
+            new Report
+            {
+                Id = 3,
+                UserId = 1,
+                ItemId = 3,
+                Date = new DateOnly(2024, 2, 5),
+                Description = "Price seems unreasonably high compared to similar items"
+            },
+            new Report
+            {
+                Id = 4,
+                UserId = 4,
+                ItemId = 7,
+                Date = new DateOnly(2024, 2, 18),
+                Description = "Item quality does not match the description provided"
+            },
+            new Report
+            {
+                Id = 5,
+                UserId = 3,
+                ItemId = 1,
+                Date = new DateOnly(2024, 3, 8),
+                Description = "Inappropriate content or tags associated with the artwork"
+            }
+            );
+
     }
 
     public DbSet<Category> Categories { get; set; } = null!;
@@ -306,5 +350,6 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Sale> Sales { get; set; } = null!;
     public DbSet<Order> Orders { get; set; } = null!;
     public DbSet<Invoice> Invoices { get; set; } = null!;
+    public DbSet<Report> Reports { get; set; } = null!;
 
 }

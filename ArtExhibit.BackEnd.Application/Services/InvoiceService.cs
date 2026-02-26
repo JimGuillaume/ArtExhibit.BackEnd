@@ -58,17 +58,14 @@ public class InvoiceService : IInvoiceService
         var invoice = new Invoice
         {
             Date = invoiceDTO.Date,
-            Amount = order.TotalPrice + order.Commission, // Calculate total from order
-            OrderId = invoiceDTO.OrderId
+            Amount = order.TotalPrice + order.Commission,
+            OrderId = invoiceDTO.OrderId,
+            Order = order
         };
 
         var newInvoice = await _invoiceRepository.AddAsync(invoice);
         if (newInvoice != null)
-        {
-            var invoiceWithRelation = await _invoiceRepository.GetByIdAsync(newInvoice.Id);
-            if (invoiceWithRelation != null)
-                return MapToDTO(invoiceWithRelation);
-        }
+            return MapToDTO(newInvoice);
         return null;
     }
     

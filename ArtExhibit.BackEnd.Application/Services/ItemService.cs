@@ -24,7 +24,7 @@ public class ItemService : IItemService
             Price = item.Price,
             Tags = item.Tags,
             CategoryId = item.CategoryId,
-            CategoryName = item.Category?.name ?? string.Empty,
+            CategoryName = item.Category?.Name ?? string.Empty,
             UserId = item.UserId,
             UserName = item.User?.UserName ?? string.Empty
         };

@@ -7,9 +7,9 @@ namespace ArtExhibit.BackEnd.Domain.Entities
 {
     public sealed class Category
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
         [Required, StringLength(100, MinimumLength = 2)]
-        public string name { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
     }
 }
