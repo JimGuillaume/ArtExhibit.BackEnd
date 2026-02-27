@@ -569,6 +569,50 @@ public class ApplicationDbContext : IdentityDbContext
             }
             );
 
+        //Seed Sample Shipments
+        builder.Entity<Shipment>().HasData(
+            new Shipment
+            {
+                Id = 1,
+                OrderId = 1,
+                Carrier = "La Poste",
+                TrackingNumber = "LP1234567890FR",
+                Status = "Delivered"
+            },
+            new Shipment
+            {
+                Id = 2,
+                OrderId = 2,
+                Carrier = "Chronopost",
+                TrackingNumber = "CP9876543210FR",
+                Status = "Delivered"
+            },
+            new Shipment
+            {
+                Id = 3,
+                OrderId = 3,
+                Carrier = "DHL Express",
+                TrackingNumber = "DHL5678901234",
+                Status = "In Transit"
+            },
+            new Shipment
+            {
+                Id = 4,
+                OrderId = 5,
+                Carrier = "UPS",
+                TrackingNumber = "UPS3456789012",
+                Status = "Delivered"
+            },
+            new Shipment
+            {
+                Id = 5,
+                OrderId = 4,
+                Carrier = "Colissimo",
+                TrackingNumber = "CL7890123456FR",
+                Status = "Pending"
+            }
+            );
+
     }
 
     public DbSet<Category> Categories { get; set; } = null!;
@@ -582,5 +626,6 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<ItemReview> ItemsReviews { get; set; } = null!;
     public DbSet<Submission> Submissions { get; set; } = null!;
     public DbSet<Payment> Payments { get; set; } = null!;
+    public DbSet<Shipment> Shipments { get; set; } = null!;
 
 }
