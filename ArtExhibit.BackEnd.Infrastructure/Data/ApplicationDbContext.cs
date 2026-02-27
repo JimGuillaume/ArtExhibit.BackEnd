@@ -426,5 +426,6 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Invoice> Invoices { get; set; } = null!;
     public DbSet<Report> Reports { get; set; } = null!;
     public DbSet<ItemReview> ItemsReviews { get; set; } = null!;
+    public DbSet<Submission> Submissions { get; set; } = null!;
 
 }

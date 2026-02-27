@@ -47,6 +47,9 @@ builder.Services.AddScoped<IReportService, ReportService>();
 builder.Services.AddScoped<IItemReviewRepository, ItemReviewRepository>();
 builder.Services.AddScoped<IItemReviewService, ItemReviewService>();
 
+builder.Services.AddScoped<ISubmissionRepository, SubmissionRepository>();
+builder.Services.AddScoped<ISubmissionService, SubmissionService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
