@@ -3,6 +3,7 @@ using System;
 using ArtExhibit.BackEnd.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260227105711_SubmissionData")]
+    partial class SubmissionData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.3");
@@ -383,91 +386,6 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                             OrderStatus = "Completed",
                             TotalPrice = 680f,
                             UserId = 1
-                        });
-                });
-
-            modelBuilder.Entity("ArtExhibit.BackEnd.Domain.Entities.Payment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<float>("Amount")
-                        .HasColumnType("REAL");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("PaymentMethod")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("Payments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Amount = 850f,
-                            OrderId = 1,
-                            PaymentMethod = "Credit Card",
-                            Status = "Completed"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Amount = 3950f,
-                            OrderId = 2,
-                            PaymentMethod = "Bank Transfer",
-                            Status = "Completed"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Amount = 450f,
-                            OrderId = 3,
-                            PaymentMethod = "PayPal",
-                            Status = "Pending"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Amount = 1250.5f,
-                            OrderId = 4,
-                            PaymentMethod = "Credit Card",
-                            Status = "Pending"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Amount = 680f,
-                            OrderId = 5,
-                            PaymentMethod = "PayPal",
-                            Status = "Completed"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Amount = 85f,
-                            OrderId = 1,
-                            PaymentMethod = "Credit Card",
-                            Status = "Failed"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Amount = 395f,
-                            OrderId = 2,
-                            PaymentMethod = "Bank Transfer",
-                            Status = "Completed"
                         });
                 });
 
@@ -1101,17 +1019,6 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("ArtExhibit.BackEnd.Domain.Entities.Payment", b =>
-                {
-                    b.HasOne("ArtExhibit.BackEnd.Domain.Entities.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("ArtExhibit.BackEnd.Domain.Entities.Sale", b =>

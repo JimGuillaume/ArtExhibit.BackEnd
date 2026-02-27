@@ -415,6 +415,160 @@ public class ApplicationDbContext : IdentityDbContext
             }
             );
 
+        //Seed Sample Submissions
+        builder.Entity<Submission>().HasData(
+            new Submission
+            {
+                Id = 1,
+                UserId = 1,
+                ItemId = 1,
+                Date = new DateOnly(2024, 1, 5),
+                Status = "Approved",
+                RejectionReason = ""
+            },
+            new Submission
+            {
+                Id = 2,
+                UserId = 1,
+                ItemId = 2,
+                Date = new DateOnly(2024, 1, 8),
+                Status = "Approved",
+                RejectionReason = ""
+            },
+            new Submission
+            {
+                Id = 3,
+                UserId = 2,
+                ItemId = 3,
+                Date = new DateOnly(2024, 1, 12),
+                Status = "Approved",
+                RejectionReason = ""
+            },
+            new Submission
+            {
+                Id = 4,
+                UserId = 2,
+                ItemId = 4,
+                Date = new DateOnly(2024, 2, 15),
+                Status = "Approved",
+                RejectionReason = ""
+            },
+            new Submission
+            {
+                Id = 5,
+                UserId = 3,
+                ItemId = 5,
+                Date = new DateOnly(2024, 1, 28),
+                Status = "Approved",
+                RejectionReason = ""
+            },
+            new Submission
+            {
+                Id = 6,
+                UserId = 3,
+                ItemId = 6,
+                Date = new DateOnly(2024, 2, 20),
+                Status = "Approved",
+                RejectionReason = ""
+            },
+            new Submission
+            {
+                Id = 7,
+                UserId = 1,
+                ItemId = 7,
+                Date = new DateOnly(2024, 3, 1),
+                Status = "Pending",
+                RejectionReason = ""
+            },
+            new Submission
+            {
+                Id = 8,
+                UserId = 3,
+                ItemId = 8,
+                Date = new DateOnly(2024, 3, 3),
+                Status = "Rejected",
+                RejectionReason = "Image quality does not meet minimum requirements for exhibition"
+            },
+            new Submission
+            {
+                Id = 9,
+                UserId = 2,
+                ItemId = 3,
+                Date = new DateOnly(2024, 3, 12),
+                Status = "Pending",
+                RejectionReason = ""
+            },
+            new Submission
+            {
+                Id = 10,
+                UserId = 1,
+                ItemId = 1,
+                Date = new DateOnly(2024, 3, 18),
+                Status = "Under Review",
+                RejectionReason = ""
+            }
+            );
+
+        //Seed Sample Payments
+        builder.Entity<Payment>().HasData(
+            new Payment
+            {
+                Id = 1,
+                OrderId = 1,
+                Amount = 850.00f,
+                Status = "Completed",
+                PaymentMethod = "Credit Card"
+            },
+            new Payment
+            {
+                Id = 2,
+                OrderId = 2,
+                Amount = 3950.00f,
+                Status = "Completed",
+                PaymentMethod = "Bank Transfer"
+            },
+            new Payment
+            {
+                Id = 3,
+                OrderId = 3,
+                Amount = 450.00f,
+                Status = "Pending",
+                PaymentMethod = "PayPal"
+            },
+            new Payment
+            {
+                Id = 4,
+                OrderId = 4,
+                Amount = 1250.50f,
+                Status = "Pending",
+                PaymentMethod = "Credit Card"
+            },
+            new Payment
+            {
+                Id = 5,
+                OrderId = 5,
+                Amount = 680.00f,
+                Status = "Completed",
+                PaymentMethod = "PayPal"
+            },
+            new Payment
+            {
+                Id = 6,
+                OrderId = 1,
+                Amount = 85.00f,
+                Status = "Failed",
+                PaymentMethod = "Credit Card"
+            },
+            new Payment
+            {
+                Id = 7,
+                OrderId = 2,
+                Amount = 395.00f,
+                Status = "Completed",
+                PaymentMethod = "Bank Transfer"
+            }
+            );
+
     }
 
     public DbSet<Category> Categories { get; set; } = null!;
@@ -427,5 +581,6 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Report> Reports { get; set; } = null!;
     public DbSet<ItemReview> ItemsReviews { get; set; } = null!;
     public DbSet<Submission> Submissions { get; set; } = null!;
+    public DbSet<Payment> Payments { get; set; } = null!;
 
 }
