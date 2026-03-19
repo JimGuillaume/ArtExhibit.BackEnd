@@ -44,6 +44,28 @@ public class SaleController : ControllerBase
         return NoContent();
     }
 
+    [HttpPost("{id:int}/bid")]
+    public async Task<IActionResult> PlaceBid(int id, PlaceBidDTO bidDTO)
+    {
+        try
+        {
+            var result = await _service.PlaceBidAsync(id, bidDTO);
+            return Ok(result);
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(ex.Message);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
     [HttpDelete]
     public async Task<IActionResult> Delete(int id)
     {

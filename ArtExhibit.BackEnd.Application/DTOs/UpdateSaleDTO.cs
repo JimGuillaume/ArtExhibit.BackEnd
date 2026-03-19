@@ -3,8 +3,8 @@
 public class UpdateSaleDTO
 {
     public int Id { get; set; }
-    public DateOnly StartDate { get; set; }
-    public DateOnly EndDate { get; set; }
+    public DateTime StartDate { get; set; }
+    public DateTime EndDate { get; set; }
     public float StartingPrice { get; set; } = 0.0f;
     public float FinalPrice { get; set; } = 0.0f;
     public string Status { get; set; } = string.Empty;

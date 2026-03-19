@@ -9,4 +9,5 @@ public interface ISaleService
     Task<SaleDTO?> AddSaleAsync(CreateSaleDTO DTO);
     Task UpdateSaleAsync(UpdateSaleDTO saleDTO);
     Task DeleteSaleAsync(int id);
+    Task<SaleDTO> PlaceBidAsync(int saleId, PlaceBidDTO bidDTO);
 }

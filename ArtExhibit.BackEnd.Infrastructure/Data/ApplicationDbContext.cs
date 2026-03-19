@@ -162,8 +162,8 @@ public class ApplicationDbContext : IdentityDbContext
             new Sale
             {
                 Id = 1,
-                StartDate = new DateOnly(2024, 1, 15),
-                EndDate = new DateOnly(2024, 1, 20),
+                StartDate = new DateTime(2024, 1, 15),
+                EndDate = new DateTime(2024, 1, 20),
                 StartingPrice = 890.00f,
                 FinalPrice = 850.00f,
                 Status = "Completed",
@@ -174,8 +174,8 @@ public class ApplicationDbContext : IdentityDbContext
             new Sale
             {
                 Id = 2,
-                StartDate = new DateOnly(2024, 2, 1),
-                EndDate = new DateOnly(2024, 2, 10),
+                StartDate = new DateTime(2024, 2, 1),
+                EndDate = new DateTime(2024, 2, 10),
                 StartingPrice = 450.00f,
                 FinalPrice = 450.00f,
                 Status = "Completed",
@@ -186,8 +186,8 @@ public class ApplicationDbContext : IdentityDbContext
             new Sale
             {
                 Id = 3,
-                StartDate = new DateOnly(2024, 3, 5),
-                EndDate = new DateOnly(2024, 3, 15),
+                StartDate = new DateTime(2024, 3, 5),
+                EndDate = new DateTime(2024, 3, 15),
                 StartingPrice = 280.00f,
                 FinalPrice = 0.0f,
                 Status = "Active",
@@ -198,8 +198,8 @@ public class ApplicationDbContext : IdentityDbContext
             new Sale
             {
                 Id = 4,
-                StartDate = new DateOnly(2024, 2, 20),
-                EndDate = new DateOnly(2024, 2, 28),
+                StartDate = new DateTime(2024, 2, 20),
+                EndDate = new DateTime(2024, 2, 28),
                 StartingPrice = 3200.00f,
                 FinalPrice = 3100.00f,
                 Status = "Completed",
@@ -210,8 +210,8 @@ public class ApplicationDbContext : IdentityDbContext
             new Sale
             {
                 Id = 5,
-                StartDate = new DateOnly(2024, 3, 10),
-                EndDate = new DateOnly(2024, 3, 20),
+                StartDate = new DateTime(2024, 3, 10),
+                EndDate = new DateTime(2024, 3, 20),
                 StartingPrice = 1250.50f,
                 FinalPrice = 0.0f,
                 Status = "Pending",
