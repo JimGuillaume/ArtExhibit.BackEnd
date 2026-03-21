@@ -18,4 +18,6 @@ public class Sale
     public User Buyer { get; set; } = null!;
     public int SellerId { get; set; }
     public User Seller { get; set; } = null!;
+
+    public ICollection<Bid> Bids { get; set; } = new List<Bid>();
 }

@@ -26,7 +26,8 @@ public class ItemService : IItemService
             CategoryId = item.CategoryId,
             CategoryName = item.Category?.Name ?? string.Empty,
             UserId = item.UserId,
-            UserName = item.User?.UserName ?? string.Empty
+            UserName = item.User?.UserName ?? string.Empty,
+            ImageLink = item.ImageLink
         };
     }
 
@@ -58,7 +59,8 @@ public class ItemService : IItemService
             Price = itemDTO.Price,
             Tags = itemDTO.Tags,
             CategoryId = itemDTO.CategoryId,
-            UserId = itemDTO.UserId
+            UserId = itemDTO.UserId,
+            ImageLink = itemDTO.ImageLink
         };
         var newItem = await _repository.AddAsync(item);
         if (newItem != null)
@@ -81,6 +83,7 @@ public class ItemService : IItemService
         item.Tags = itemDTO.Tags;
         item.CategoryId = itemDTO.CategoryId;
         item.UserId = itemDTO.UserId;
+        item.ImageLink = itemDTO.ImageLink;
         
         await _repository.UpdateAsync(item);
     }

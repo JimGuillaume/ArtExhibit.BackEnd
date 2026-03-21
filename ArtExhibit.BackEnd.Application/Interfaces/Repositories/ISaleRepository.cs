@@ -9,4 +9,6 @@ public interface ISaleRepository
     Task<Sale> AddAsync(Sale sale);
     Task UpdateAsync(Sale sale);
     Task DeleteAsync(int id);
+    Task<Bid> AddBidAsync(Bid bid);
+    Task<IEnumerable<Bid>> GetBidsBySaleIdAsync(int saleId);
 }

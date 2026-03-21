@@ -18,7 +18,8 @@ public class UserRepository : IUserRepository
             .Include(u => u.UserType)
             .AsNoTracking()
             .ToListAsync();
-    }    
+    }
+
     public async Task<User?> GetByIdAsync(int id)
     {
         return await _context.Users
@@ -26,6 +27,23 @@ public class UserRepository : IUserRepository
             .AsNoTracking()
             .FirstOrDefaultAsync(u => u.Id == id);
     }
+
+    public async Task<User?> GetByEmailAsync(string email)
+    {
+        return await _context.Users
+            .Include(u => u.UserType)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(u => u.UserEmail.ToLower() == email.ToLower());
+    }
+
+    public async Task<User?> GetByRefreshTokenHashAsync(string refreshTokenHash)
+    {
+        return await _context.Users
+            .Include(u => u.UserType)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(u => u.RefreshTokenHash == refreshTokenHash);
+    }
+
     public async Task<User?> AddAsync(User entity)
     {
         await _context.Users.AddAsync(entity);
@@ -36,7 +54,7 @@ public class UserRepository : IUserRepository
     {
         _context.Users.Update(entity);
         await _context.SaveChangesAsync();
-    } 
+    }
     public async Task DeleteAsync(int id)
     {
         var user = await _context.Users.FindAsync(id);
@@ -46,6 +64,4 @@ public class UserRepository : IUserRepository
             await _context.SaveChangesAsync();
         }
     }
-
-
 }

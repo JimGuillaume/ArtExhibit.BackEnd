@@ -29,7 +29,20 @@ public class SaleService : ISaleService
             BuyerId = sale.BuyerId,
             BuyerUserName = sale.Buyer.UserName,
             SellerId = sale.SellerId,
-            SellerUserName = sale.Seller.UserName
+            SellerUserName = sale.Seller.UserName,
+        };
+    }
+
+    private static BidDTO MapBidToDTO(Bid bid)
+    {
+        return new BidDTO
+        {
+            Id = bid.Id,
+            SaleId = bid.SaleId,
+            BuyerId = bid.BuyerId,
+            BuyerUserName = bid.Buyer.UserName,
+            Amount = bid.Amount,
+            PlacedAtUtc = bid.PlacedAtUtc
         };
     }
 
@@ -122,6 +135,16 @@ public class SaleService : ISaleService
         if (bidDTO.BidAmount <= currentPrice)
             throw new ArgumentException("Bid amount must be greater than current price.");
 
+        var bid = new Bid
+        {
+            SaleId = saleId,
+            BuyerId = bidDTO.BuyerId,
+            Amount = bidDTO.BidAmount,
+            PlacedAtUtc = nowUtc
+        };
+
+        await _repository.AddBidAsync(bid);
+
         sale.BuyerId = bidDTO.BuyerId;
         sale.FinalPrice = bidDTO.BidAmount;
 
@@ -131,6 +154,16 @@ public class SaleService : ISaleService
 
         var updatedSale = await _repository.GetByIdAsync(saleId) ?? sale;
         return MapToDTO(updatedSale);
+    }
+
+    public async Task<IEnumerable<BidDTO>> GetBidsBySaleIdAsync(int saleId)
+    {
+        var sale = await _repository.GetByIdAsync(saleId);
+        if (sale == null)
+            throw new KeyNotFoundException("Sale not found.");
+
+        var bids = await _repository.GetBidsBySaleIdAsync(saleId);
+        return bids.Select(MapBidToDTO);
     }
 
     private static void ApplyAntiSniping(Sale sale, DateTime bidTimeUtc)

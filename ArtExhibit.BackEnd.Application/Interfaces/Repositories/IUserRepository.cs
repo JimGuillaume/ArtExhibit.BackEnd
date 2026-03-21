@@ -6,6 +6,8 @@ public interface IUserRepository
 {
     Task<IEnumerable<User>> GetAllAsync();
     Task<User?> GetByIdAsync(int id);
+    Task<User?> GetByEmailAsync(string email);
+    Task<User?> GetByRefreshTokenHashAsync(string refreshTokenHash);
     Task<User?> AddAsync(User category);
     Task UpdateAsync(User category);
     Task DeleteAsync(int id);

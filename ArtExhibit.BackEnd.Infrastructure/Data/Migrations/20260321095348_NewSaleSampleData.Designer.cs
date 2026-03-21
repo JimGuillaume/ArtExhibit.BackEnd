@@ -3,6 +3,7 @@ using System;
 using ArtExhibit.BackEnd.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,97 +11,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260321095348_NewSaleSampleData")]
+    partial class NewSaleSampleData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.3");
-
-            modelBuilder.Entity("ArtExhibit.BackEnd.Domain.Entities.Bid", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<float>("Amount")
-                        .HasColumnType("REAL");
-
-                    b.Property<int>("BuyerId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("PlacedAtUtc")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("SaleId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BuyerId");
-
-                    b.HasIndex("SaleId");
-
-                    b.ToTable("Bids");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Amount = 820f,
-                            BuyerId = 2,
-                            PlacedAtUtc = new DateTime(2024, 1, 18, 10, 30, 0, 0, DateTimeKind.Unspecified),
-                            SaleId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Amount = 850f,
-                            BuyerId = 4,
-                            PlacedAtUtc = new DateTime(2024, 1, 19, 14, 45, 0, 0, DateTimeKind.Unspecified),
-                            SaleId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Amount = 450f,
-                            BuyerId = 1,
-                            PlacedAtUtc = new DateTime(2024, 2, 8, 16, 10, 0, 0, DateTimeKind.Unspecified),
-                            SaleId = 2
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Amount = 300f,
-                            BuyerId = 2,
-                            PlacedAtUtc = new DateTime(2026, 3, 20, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            SaleId = 3
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Amount = 3050f,
-                            BuyerId = 3,
-                            PlacedAtUtc = new DateTime(2024, 2, 26, 11, 20, 0, 0, DateTimeKind.Unspecified),
-                            SaleId = 4
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Amount = 3100f,
-                            BuyerId = 4,
-                            PlacedAtUtc = new DateTime(2024, 2, 27, 17, 35, 0, 0, DateTimeKind.Unspecified),
-                            SaleId = 4
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Amount = 1260f,
-                            BuyerId = 2,
-                            PlacedAtUtc = new DateTime(2026, 6, 10, 13, 15, 0, 0, DateTimeKind.Unspecified),
-                            SaleId = 5
-                        });
-                });
 
             modelBuilder.Entity("ArtExhibit.BackEnd.Domain.Entities.Category", b =>
                 {
@@ -947,19 +865,6 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("RefreshTokenExpiresAtUtc")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("RefreshTokenHash")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("RefreshTokenRevokedAtUtc")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("UserEmail")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -987,7 +892,6 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                             Id = 1,
                             FirstName = "Marie",
                             LastName = "Dubois",
-                            PasswordHash = "oQnjaUetVt4dyhzEnw74rJrZp7GqDfQfs8TLc8H/Aeo=",
                             UserEmail = "marie.dubois@example.com",
                             UserName = "marie_artist",
                             UserPhone = "0612345678",
@@ -998,7 +902,6 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                             Id = 2,
                             FirstName = "Pierre",
                             LastName = "Martin",
-                            PasswordHash = "oQnjaUetVt4dyhzEnw74rJrZp7GqDfQfs8TLc8H/Aeo=",
                             UserEmail = "pierre.martin@example.com",
                             UserName = "pierre_sculptor",
                             UserPhone = "0623456789",
@@ -1009,7 +912,6 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                             Id = 3,
                             FirstName = "Sophie",
                             LastName = "Bernard",
-                            PasswordHash = "oQnjaUetVt4dyhzEnw74rJrZp7GqDfQfs8TLc8H/Aeo=",
                             UserEmail = "sophie.bernard@example.com",
                             UserName = "sophie_photo",
                             UserPhone = "0634567890",
@@ -1020,7 +922,6 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                             Id = 4,
                             FirstName = "Jean",
                             LastName = "Admin",
-                            PasswordHash = "oQnjaUetVt4dyhzEnw74rJrZp7GqDfQfs8TLc8H/Aeo=",
                             UserEmail = "admin@example.com",
                             UserName = "admin_user",
                             UserPhone = "0645678901",
@@ -1247,25 +1148,6 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ArtExhibit.BackEnd.Domain.Entities.Bid", b =>
-                {
-                    b.HasOne("ArtExhibit.BackEnd.Domain.Entities.User", "Buyer")
-                        .WithMany()
-                        .HasForeignKey("BuyerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("ArtExhibit.BackEnd.Domain.Entities.Sale", "Sale")
-                        .WithMany("Bids")
-                        .HasForeignKey("SaleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Buyer");
-
-                    b.Navigation("Sale");
-                });
-
             modelBuilder.Entity("ArtExhibit.BackEnd.Domain.Entities.Invoice", b =>
                 {
                     b.HasOne("ArtExhibit.BackEnd.Domain.Entities.Order", "Order")
@@ -1435,11 +1317,6 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ArtExhibit.BackEnd.Domain.Entities.Sale", b =>
-                {
-                    b.Navigation("Bids");
                 });
 #pragma warning restore 612, 618
         }

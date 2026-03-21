@@ -1,11 +1,15 @@
 ﻿using ArtExhibit.BackEnd.Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace ArtExhibit.BackEnd.Infrastructure.Data;
 
 public class ApplicationDbContext : IdentityDbContext
 {
+    private static readonly string SeedPasswordHash = Convert.ToBase64String(SHA256.HashData(Encoding.UTF8.GetBytes("Password123!")));
+
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {
@@ -14,6 +18,18 @@ public class ApplicationDbContext : IdentityDbContext
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+
+        builder.Entity<Bid>()
+            .HasOne(b => b.Sale)
+            .WithMany(s => s.Bids)
+            .HasForeignKey(b => b.SaleId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Entity<Bid>()
+            .HasOne(b => b.Buyer)
+            .WithMany()
+            .HasForeignKey(b => b.BuyerId)
+            .OnDelete(DeleteBehavior.Restrict);
 
         //Seed Initial Category
         builder.Entity<Category>().HasData(
@@ -39,6 +55,7 @@ public class ApplicationDbContext : IdentityDbContext
                 LastName = "Dubois",
                 UserEmail = "marie.dubois@example.com",
                 UserPhone = "0612345678",
+                PasswordHash = SeedPasswordHash,
                 UserTypeId = 1
             },
             new User
@@ -49,6 +66,7 @@ public class ApplicationDbContext : IdentityDbContext
                 LastName = "Martin",
                 UserEmail = "pierre.martin@example.com",
                 UserPhone = "0623456789",
+                PasswordHash = SeedPasswordHash,
                 UserTypeId = 1
             },
             new User
@@ -59,6 +77,7 @@ public class ApplicationDbContext : IdentityDbContext
                 LastName = "Bernard",
                 UserEmail = "sophie.bernard@example.com",
                 UserPhone = "0634567890",
+                PasswordHash = SeedPasswordHash,
                 UserTypeId = 1
             },
             new User
@@ -69,6 +88,7 @@ public class ApplicationDbContext : IdentityDbContext
                 LastName = "Admin",
                 UserEmail = "admin@example.com",
                 UserPhone = "0645678901",
+                PasswordHash = SeedPasswordHash,
                 UserTypeId = 2
             }
             );
@@ -83,7 +103,8 @@ public class ApplicationDbContext : IdentityDbContext
                 Price = 1250.50f,
                 Tags = ["landscape", "paris", "sunset", "oil"],
                 CategoryId = 1,
-                UserId = 1
+                UserId = 1,
+                ImageLink = "https://picsum.photos/600"
             },
             new Item
             {
@@ -93,7 +114,8 @@ public class ApplicationDbContext : IdentityDbContext
                 Price = 890.00f,
                 Tags = ["abstract", "modern", "colorful"],
                 CategoryId = 1,
-                UserId = 1
+                UserId = 1,
+                ImageLink = "https://picsum.photos/500"
             },
             new Item
             {
@@ -103,7 +125,8 @@ public class ApplicationDbContext : IdentityDbContext
                 Price = 5500.00f,
                 Tags = ["bronze", "warrior", "ancient", "statue"],
                 CategoryId = 2,
-                UserId = 2
+                UserId = 2,
+                ImageLink = "https://picsum.photos/400"
             },
             new Item
             {
@@ -113,7 +136,8 @@ public class ApplicationDbContext : IdentityDbContext
                 Price = 3200.00f,
                 Tags = ["marble", "ballet", "dance", "elegant"],
                 CategoryId = 2,
-                UserId = 2
+                UserId = 2,
+                ImageLink = "https://picsum.photos/700"
             },
             new Item
             {
@@ -123,7 +147,8 @@ public class ApplicationDbContext : IdentityDbContext
                 Price = 450.00f,
                 Tags = ["photography", "black-white", "urban", "paris"],
                 CategoryId = 3,
-                UserId = 3
+                UserId = 3,
+                ImageLink = "https://picsum.photos/800"
             },
             new Item
             {
@@ -133,7 +158,8 @@ public class ApplicationDbContext : IdentityDbContext
                 Price = 680.00f,
                 Tags = ["nature", "landscape", "photography", "color"],
                 CategoryId = 3,
-                UserId = 3
+                UserId = 3,
+                ImageLink = "https://picsum.photos/900"
             },
             new Item
             {
@@ -143,7 +169,8 @@ public class ApplicationDbContext : IdentityDbContext
                 Price = 320.00f,
                 Tags = ["portrait", "charcoal", "drawing", "realistic"],
                 CategoryId = 4,
-                UserId = 1
+                UserId = 1,
+                ImageLink = "https://picsum.photos/505"
             },
             new Item
             {
@@ -153,7 +180,8 @@ public class ApplicationDbContext : IdentityDbContext
                 Price = 280.00f,
                 Tags = ["botanical", "sketches", "nature", "pencil"],
                 CategoryId = 4,
-                UserId = 3
+                UserId = 3,
+                ImageLink = "https://picsum.photos/405"
             }
             );
 
@@ -186,8 +214,8 @@ public class ApplicationDbContext : IdentityDbContext
             new Sale
             {
                 Id = 3,
-                StartDate = new DateTime(2024, 3, 5),
-                EndDate = new DateTime(2024, 3, 15),
+                StartDate = new DateTime(2026, 3, 5),
+                EndDate = new DateTime(2026, 5, 15),
                 StartingPrice = 280.00f,
                 FinalPrice = 0.0f,
                 Status = "Active",
@@ -210,14 +238,74 @@ public class ApplicationDbContext : IdentityDbContext
             new Sale
             {
                 Id = 5,
-                StartDate = new DateTime(2024, 3, 10),
-                EndDate = new DateTime(2024, 3, 20),
+                StartDate = new DateTime(2026, 6, 1),
+                EndDate = new DateTime(2026, 8, 20),
                 StartingPrice = 1250.50f,
                 FinalPrice = 0.0f,
                 Status = "Pending",
                 ItemId = 1,
                 SellerId = 1,
                 BuyerId = 2
+            }
+            );
+
+        //Seed Sample Bids
+        builder.Entity<Bid>().HasData(
+            new Bid
+            {
+                Id = 1,
+                SaleId = 1,
+                BuyerId = 2,
+                Amount = 820.00f,
+                PlacedAtUtc = new DateTime(2024, 1, 18, 10, 30, 0)
+            },
+            new Bid
+            {
+                Id = 2,
+                SaleId = 1,
+                BuyerId = 4,
+                Amount = 850.00f,
+                PlacedAtUtc = new DateTime(2024, 1, 19, 14, 45, 0)
+            },
+            new Bid
+            {
+                Id = 3,
+                SaleId = 2,
+                BuyerId = 1,
+                Amount = 450.00f,
+                PlacedAtUtc = new DateTime(2024, 2, 8, 16, 10, 0)
+            },
+            new Bid
+            {
+                Id = 4,
+                SaleId = 3,
+                BuyerId = 2,
+                Amount = 300.00f,
+                PlacedAtUtc = new DateTime(2026, 3, 20, 9, 0, 0)
+            },
+            new Bid
+            {
+                Id = 5,
+                SaleId = 4,
+                BuyerId = 3,
+                Amount = 3050.00f,
+                PlacedAtUtc = new DateTime(2024, 2, 26, 11, 20, 0)
+            },
+            new Bid
+            {
+                Id = 6,
+                SaleId = 4,
+                BuyerId = 4,
+                Amount = 3100.00f,
+                PlacedAtUtc = new DateTime(2024, 2, 27, 17, 35, 0)
+            },
+            new Bid
+            {
+                Id = 7,
+                SaleId = 5,
+                BuyerId = 2,
+                Amount = 1260.00f,
+                PlacedAtUtc = new DateTime(2026, 6, 10, 13, 15, 0)
             }
             );
 
@@ -627,5 +715,6 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Submission> Submissions { get; set; } = null!;
     public DbSet<Payment> Payments { get; set; } = null!;
     public DbSet<Shipment> Shipments { get; set; } = null!;
+    public DbSet<Bid> Bids { get; set; } = null!;
 
 }

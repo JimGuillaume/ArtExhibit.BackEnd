@@ -10,4 +10,5 @@ public interface ISaleService
     Task UpdateSaleAsync(UpdateSaleDTO saleDTO);
     Task DeleteSaleAsync(int id);
     Task<SaleDTO> PlaceBidAsync(int saleId, PlaceBidDTO bidDTO);
+    Task<IEnumerable<BidDTO>> GetBidsBySaleIdAsync(int saleId);
 }

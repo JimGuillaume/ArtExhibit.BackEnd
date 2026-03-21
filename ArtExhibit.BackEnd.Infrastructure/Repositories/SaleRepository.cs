@@ -44,6 +44,25 @@ public class SaleRepository : ISaleRepository
         _context.Sales.Update(sale);
         await _context.SaveChangesAsync();
     }
+
+    public async Task<Bid> AddBidAsync(Bid bid)
+    {
+        await _context.Bids.AddAsync(bid);
+        await _context.SaveChangesAsync();
+        return bid;
+    }
+
+    public async Task<IEnumerable<Bid>> GetBidsBySaleIdAsync(int saleId)
+    {
+        return await _context.Bids
+            .Where(b => b.SaleId == saleId)
+            .Include(b => b.Buyer)
+            .AsNoTracking()
+            .OrderByDescending(b => b.Amount)
+            .ThenByDescending(b => b.PlacedAtUtc)
+            .ToListAsync();
+    }
+
     public async Task DeleteAsync(int id)
     {
         var sale = await _context.Sales.FindAsync(id);

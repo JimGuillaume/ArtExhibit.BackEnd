@@ -1,4 +1,6 @@
-﻿namespace ArtExhibit.BackEnd.Domain.Entities;
+﻿using System.Text.Json.Serialization;
+
+namespace ArtExhibit.BackEnd.Domain.Entities;
 
 public class Item
 {
@@ -7,6 +9,8 @@ public class Item
     public string Description { get; set; } = string.Empty;
     public float Price { get; set; } = 0;
     public string[] Tags { get; set; } = Array.Empty<string>();
+    [JsonPropertyName("image")]
+    public string ImageLink { get; set; } = string.Empty;
 
 
     //Category

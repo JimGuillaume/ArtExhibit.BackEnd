@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace ArtExhibit.BackEnd.Application.DTOs;
 
 public class CreateItemDTO
@@ -8,4 +10,6 @@ public class CreateItemDTO
     public string[] Tags { get; set; } = Array.Empty<string>();
     public int CategoryId { get; set; }
     public int UserId { get; set; }
+    [JsonPropertyName("image")]
+    public string ImageLink { get; set; } = null!;
 }

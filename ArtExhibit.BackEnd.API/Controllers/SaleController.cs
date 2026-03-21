@@ -44,6 +44,20 @@ public class SaleController : ControllerBase
         return NoContent();
     }
 
+    [HttpGet("{id:int}/bids")]
+    public async Task<IActionResult> GetBids(int id)
+    {
+        try
+        {
+            var result = await _service.GetBidsBySaleIdAsync(id);
+            return Ok(result);
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(ex.Message);
+        }
+    }
+
     [HttpPost("{id:int}/bid")]
     public async Task<IActionResult> PlaceBid(int id, PlaceBidDTO bidDTO)
     {

@@ -3,6 +3,7 @@ using System;
 using ArtExhibit.BackEnd.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,97 +11,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260319193643_AddedImageLinkToItem")]
+    partial class AddedImageLinkToItem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.3");
-
-            modelBuilder.Entity("ArtExhibit.BackEnd.Domain.Entities.Bid", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<float>("Amount")
-                        .HasColumnType("REAL");
-
-                    b.Property<int>("BuyerId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("PlacedAtUtc")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("SaleId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BuyerId");
-
-                    b.HasIndex("SaleId");
-
-                    b.ToTable("Bids");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Amount = 820f,
-                            BuyerId = 2,
-                            PlacedAtUtc = new DateTime(2024, 1, 18, 10, 30, 0, 0, DateTimeKind.Unspecified),
-                            SaleId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Amount = 850f,
-                            BuyerId = 4,
-                            PlacedAtUtc = new DateTime(2024, 1, 19, 14, 45, 0, 0, DateTimeKind.Unspecified),
-                            SaleId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Amount = 450f,
-                            BuyerId = 1,
-                            PlacedAtUtc = new DateTime(2024, 2, 8, 16, 10, 0, 0, DateTimeKind.Unspecified),
-                            SaleId = 2
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Amount = 300f,
-                            BuyerId = 2,
-                            PlacedAtUtc = new DateTime(2026, 3, 20, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            SaleId = 3
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Amount = 3050f,
-                            BuyerId = 3,
-                            PlacedAtUtc = new DateTime(2024, 2, 26, 11, 20, 0, 0, DateTimeKind.Unspecified),
-                            SaleId = 4
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Amount = 3100f,
-                            BuyerId = 4,
-                            PlacedAtUtc = new DateTime(2024, 2, 27, 17, 35, 0, 0, DateTimeKind.Unspecified),
-                            SaleId = 4
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Amount = 1260f,
-                            BuyerId = 2,
-                            PlacedAtUtc = new DateTime(2026, 6, 10, 13, 15, 0, 0, DateTimeKind.Unspecified),
-                            SaleId = 5
-                        });
-                });
 
             modelBuilder.Entity("ArtExhibit.BackEnd.Domain.Entities.Category", b =>
                 {
@@ -207,8 +125,7 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
 
                     b.Property<string>("ImageLink")
                         .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasJsonPropertyName("image");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -238,7 +155,7 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                             Id = 1,
                             CategoryId = 1,
                             Description = "Beautiful oil painting capturing the golden hour over the Eiffel Tower",
-                            ImageLink = "https://picsum.photos/600",
+                            ImageLink = "https://picsum.photos/500",
                             Name = "Sunset Over Paris",
                             Price = 1250.5f,
                             Tags = "[\"landscape\",\"paris\",\"sunset\",\"oil\"]",
@@ -260,7 +177,7 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                             Id = 3,
                             CategoryId = 2,
                             Description = "Life-size bronze sculpture of an ancient warrior",
-                            ImageLink = "https://picsum.photos/400",
+                            ImageLink = "https://picsum.photos/500",
                             Name = "Bronze Warrior",
                             Price = 5500f,
                             Tags = "[\"bronze\",\"warrior\",\"ancient\",\"statue\"]",
@@ -271,7 +188,7 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                             Id = 4,
                             CategoryId = 2,
                             Description = "Elegant marble sculpture depicting a ballet dancer",
-                            ImageLink = "https://picsum.photos/700",
+                            ImageLink = "https://picsum.photos/500",
                             Name = "Dancing Figure",
                             Price = 3200f,
                             Tags = "[\"marble\",\"ballet\",\"dance\",\"elegant\"]",
@@ -282,7 +199,7 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                             Id = 5,
                             CategoryId = 3,
                             Description = "Black and white photography series of Parisian streets",
-                            ImageLink = "https://picsum.photos/800",
+                            ImageLink = "https://picsum.photos/500",
                             Name = "Urban Streets",
                             Price = 450f,
                             Tags = "[\"photography\",\"black-white\",\"urban\",\"paris\"]",
@@ -293,7 +210,7 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                             Id = 6,
                             CategoryId = 3,
                             Description = "Stunning landscape photography collection",
-                            ImageLink = "https://picsum.photos/900",
+                            ImageLink = "https://picsum.photos/500",
                             Name = "Nature's Beauty",
                             Price = 680f,
                             Tags = "[\"nature\",\"landscape\",\"photography\",\"color\"]",
@@ -304,7 +221,7 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                             Id = 7,
                             CategoryId = 4,
                             Description = "Detailed charcoal drawing of a human face",
-                            ImageLink = "https://picsum.photos/505",
+                            ImageLink = "https://picsum.photos/500",
                             Name = "Portrait Study",
                             Price = 320f,
                             Tags = "[\"portrait\",\"charcoal\",\"drawing\",\"realistic\"]",
@@ -315,7 +232,7 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                             Id = 8,
                             CategoryId = 4,
                             Description = "Collection of detailed plant and flower sketches",
-                            ImageLink = "https://picsum.photos/405",
+                            ImageLink = "https://picsum.photos/500",
                             Name = "Botanical Sketches",
                             Price = 280f,
                             Tags = "[\"botanical\",\"sketches\",\"nature\",\"pencil\"]",
@@ -705,11 +622,11 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                         {
                             Id = 3,
                             BuyerId = 2,
-                            EndDate = new DateTime(2026, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDate = new DateTime(2024, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FinalPrice = 0f,
                             ItemId = 8,
                             SellerId = 3,
-                            StartDate = new DateTime(2026, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartDate = new DateTime(2024, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StartingPrice = 280f,
                             Status = "Active"
                         },
@@ -729,11 +646,11 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                         {
                             Id = 5,
                             BuyerId = 2,
-                            EndDate = new DateTime(2026, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndDate = new DateTime(2024, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FinalPrice = 0f,
                             ItemId = 1,
                             SellerId = 1,
-                            StartDate = new DateTime(2026, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StartDate = new DateTime(2024, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StartingPrice = 1250.5f,
                             Status = "Pending"
                         });
@@ -947,19 +864,6 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("RefreshTokenExpiresAtUtc")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("RefreshTokenHash")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("RefreshTokenRevokedAtUtc")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("UserEmail")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -987,7 +891,6 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                             Id = 1,
                             FirstName = "Marie",
                             LastName = "Dubois",
-                            PasswordHash = "oQnjaUetVt4dyhzEnw74rJrZp7GqDfQfs8TLc8H/Aeo=",
                             UserEmail = "marie.dubois@example.com",
                             UserName = "marie_artist",
                             UserPhone = "0612345678",
@@ -998,7 +901,6 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                             Id = 2,
                             FirstName = "Pierre",
                             LastName = "Martin",
-                            PasswordHash = "oQnjaUetVt4dyhzEnw74rJrZp7GqDfQfs8TLc8H/Aeo=",
                             UserEmail = "pierre.martin@example.com",
                             UserName = "pierre_sculptor",
                             UserPhone = "0623456789",
@@ -1009,7 +911,6 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                             Id = 3,
                             FirstName = "Sophie",
                             LastName = "Bernard",
-                            PasswordHash = "oQnjaUetVt4dyhzEnw74rJrZp7GqDfQfs8TLc8H/Aeo=",
                             UserEmail = "sophie.bernard@example.com",
                             UserName = "sophie_photo",
                             UserPhone = "0634567890",
@@ -1020,7 +921,6 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                             Id = 4,
                             FirstName = "Jean",
                             LastName = "Admin",
-                            PasswordHash = "oQnjaUetVt4dyhzEnw74rJrZp7GqDfQfs8TLc8H/Aeo=",
                             UserEmail = "admin@example.com",
                             UserName = "admin_user",
                             UserPhone = "0645678901",
@@ -1247,25 +1147,6 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ArtExhibit.BackEnd.Domain.Entities.Bid", b =>
-                {
-                    b.HasOne("ArtExhibit.BackEnd.Domain.Entities.User", "Buyer")
-                        .WithMany()
-                        .HasForeignKey("BuyerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("ArtExhibit.BackEnd.Domain.Entities.Sale", "Sale")
-                        .WithMany("Bids")
-                        .HasForeignKey("SaleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Buyer");
-
-                    b.Navigation("Sale");
-                });
-
             modelBuilder.Entity("ArtExhibit.BackEnd.Domain.Entities.Invoice", b =>
                 {
                     b.HasOne("ArtExhibit.BackEnd.Domain.Entities.Order", "Order")
@@ -1435,11 +1316,6 @@ namespace ArtExhibit.BackEnd.Infrastructure.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ArtExhibit.BackEnd.Domain.Entities.Sale", b =>
-                {
-                    b.Navigation("Bids");
                 });
 #pragma warning restore 612, 618
         }
