@@ -46,6 +46,7 @@ public class ApplicationDbContext : IdentityDbContext
             );
 
         //Seed Sample Users
+        //Tous les mdps sont : Password123!
         builder.Entity<User>().HasData(
             new User
             {

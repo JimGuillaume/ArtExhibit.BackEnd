@@ -8,10 +8,12 @@ namespace ArtExhibit.BackEnd.Infrastructure.Repositories;
 public class UserRepository : IUserRepository
 {
     private readonly ApplicationDbContext _context;
+
     public UserRepository(ApplicationDbContext context)
     {
         _context = context;
     }
+
     public async Task<IEnumerable<User>> GetAllAsync()
     {
         return await _context.Users
@@ -48,13 +50,29 @@ public class UserRepository : IUserRepository
     {
         await _context.Users.AddAsync(entity);
         await _context.SaveChangesAsync();
+
+        _context.Entry(entity).State = EntityState.Detached;
+
         return entity;
     }
+
     public async Task UpdateAsync(User entity)
     {
-        _context.Users.Update(entity);
+        var trackedEntity = await _context.Users.FirstOrDefaultAsync(u => u.Id == entity.Id);
+
+        if (trackedEntity is null)
+        {
+            _context.Users.Attach(entity);
+            _context.Entry(entity).State = EntityState.Modified;
+        }
+        else
+        {
+            _context.Entry(trackedEntity).CurrentValues.SetValues(entity);
+        }
+
         await _context.SaveChangesAsync();
     }
+
     public async Task DeleteAsync(int id)
     {
         var user = await _context.Users.FindAsync(id);
