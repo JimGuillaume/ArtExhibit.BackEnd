@@ -1,4 +1,6 @@
-﻿namespace ArtExhibit.BackEnd.Application.DTOs;
+﻿using System.Text.Json.Serialization;
+
+namespace ArtExhibit.BackEnd.Application.DTOs;
 
 public class SaleDTO
 {
@@ -6,6 +8,8 @@ public class SaleDTO
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public float StartingPrice { get; set; } = 0.0f;
+
+    [JsonPropertyName("amount")]
     public float FinalPrice { get; set; } = 0.0f;
     public string Status { get; set; } = string.Empty;
 
